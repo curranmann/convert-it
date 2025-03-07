@@ -641,6 +641,26 @@
             color: #ccc;
         }
         
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #0f2b5b;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
         /* Responsive */
         @media (max-width: 992px) {
             .hero-title {
@@ -663,21 +683,66 @@
             .footer-column {
                 flex-basis: 48%;
             }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
         }
         
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            #main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background-color: white;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 999;
+                padding: 80px 20px 30px;
+                overflow-y: auto;
+            }
+            
+            #main-nav.active {
+                right: 0;
             }
             
             .nav-list {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                margin-top: 0;
             }
             
             .nav-item {
-                margin: 0 15px 10px;
+                margin: 0 0 20px;
+                width: 100%;
+            }
+            
+            .nav-link {
+                display: block;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-btn {
+                margin-top: 20px;
+            }
+            
+            .nav-btn .btn {
+                width: 100%;
+                text-align: center;
             }
             
             .hero-title {
@@ -699,6 +764,22 @@
             .footer-column {
                 flex-basis: 100%;
             }
+            
+            /* Overlay when menu is open */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 998;
+            }
+            
+            .menu-overlay.active {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -709,13 +790,18 @@
             <div class="logo">
                 RLC <span>Agency</span>
             </div>
-            <nav>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="main-nav">
                 <ul class="nav-list">
                     <li class="nav-item"><a href="#how-it-works" class="nav-link">How It Works</a></li>
                     <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
                     <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item nav-btn"><a href="#contact" class="btn">Get Started</a></li>
+                    <li class="nav-item nav-btn"><a href="tel:6159623999" class="btn">Call Now: (615) 962-3999</a></li>
                 </ul>
             </nav>
         </div>
@@ -727,8 +813,7 @@
             <h1 class="hero-title">Premium HVAC Leads Exclusively For Your Business</h1>
             <p class="hero-subtitle">We generate high-quality, exclusive leads from homeowners actively seeking HVAC repair and installation/replacement services in your area.</p>
             <div class="hero-cta">
-                <a href="#contact" class="btn">Start Getting Leads</a>
-                <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                <a href="tel:6159623999" class="btn">Call Now: (615) 962-3999</a>
             </div>
         </div>
     </section>
@@ -748,8 +833,8 @@
                 
                 <div class="step">
                     <div class="step-icon">2</div>
-                    <h3 class="step-title">Live Call Transfer</h3>
-                    <p class="step-description">When a homeowner calls, we verify they need HVAC services and transfer them directly to your business in real-time.</p>
+                    <h3 class="step-title">Direct Homeowner Calls</h3>
+                    <p class="step-description">Homeowners call directly to your business after finding our targeted advertisements. These are live, direct calls - never transfers.</p>
                 </div>
                 
                 <div class="step">
@@ -776,8 +861,8 @@
                 
                 <div class="benefit">
                     <div class="benefit-icon">📱</div>
-                    <h3 class="benefit-title">Live Call Transfers</h3>
-                    <p>Get connected to potential customers in real-time while they're actively seeking HVAC services.</p>
+                    <h3 class="benefit-title">Direct Homeowner Calls</h3>
+                    <p>Receive calls directly from homeowners actively seeking HVAC services - no transfers, just real customers ready for service.</p>
                 </div>
                 
                 <div class="benefit">
@@ -859,33 +944,195 @@
     <!-- Valid Lead Section -->
     <section class="section valid-lead">
         <div class="container">
-            <div class="question-card">
-                <h3 class="question">What is a Valid Lead?</h3>
-                <div class="answer">
-                    <p>At RLC Agency, we consider a lead valid when it meets the following criteria:</p>
-                    <ul style="margin-top: 20px; margin-left: 20px;">
-                        <li>The caller is a homeowner (not a renter or property manager)</li>
-                        <li>The caller is seeking HVAC repair or installation/replacement services</li>
-                        <li>The caller is located within your defined service area</li>
-                        <li>The call lasts a minimum of 60 seconds or results in a booked appointment</li>
-                        <li>The call is not a duplicate from the same customer within a 30-day period</li>
-                    </ul>
-                    
-                    <div class="payment-info">
-                        <h4 class="payment-title">When Payment is Due</h4>
-                        <p style="text-align: center;">Payment is only due for calls that meet our valid lead criteria. You will never pay for:</p>
-                        <ul style="margin-top: 20px; margin-left: 20px;">
-                            <li>Wrong numbers or spam calls</li>
-                            <li>Solicitation calls</li>
-                            <li>Calls from outside your service area</li>
-                            <li>Calls about services you don't offer</li>
-                            <li>Duplicate calls from the same customer within 30 days</li>
-                        </ul>
+            <h2 class="section-title">What is a Valid Lead?</h2>
+            <div class="valid-lead-container">
+                <div class="valid-lead-card">
+                    <div class="valid-lead-icon">✓</div>
+                    <div class="valid-lead-content">
+                        <h3>Valid Lead Criteria</h3>
+                        <div class="criteria-list">
+                            <div class="criteria-item">
+                                <div class="criteria-check">✓</div>
+                                <p>Homeowner (not a renter or property manager)</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-check">✓</div>
+                                <p>Seeking HVAC repair or installation/replacement services</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-check">✓</div>
+                                <p>Located within your defined service area</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-check">✓</div>
+                                <p>Call duration of 60+ seconds or booking an appointment</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-check">✓</div>
+                                <p>First-time caller (within a 30-day period)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="valid-lead-card">
+                    <div class="valid-lead-icon">$</div>
+                    <div class="valid-lead-content">
+                        <h3>When Payment is Due</h3>
+                        <p class="payment-subtitle">Payment is only due for calls that meet our valid lead criteria.</p>
+                        <div class="payment-divider"></div>
+                        <h4>You Will NEVER Pay For:</h4>
+                        <div class="criteria-list">
+                            <div class="criteria-item">
+                                <div class="criteria-cross">✕</div>
+                                <p>Wrong numbers or spam calls</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-cross">✕</div>
+                                <p>Solicitation calls</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-cross">✕</div>
+                                <p>Calls from outside your service area</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-cross">✕</div>
+                                <p>Calls about services you don't offer</p>
+                            </div>
+                            <div class="criteria-item">
+                                <div class="criteria-cross">✕</div>
+                                <p>Duplicate calls from the same customer within 30 days</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
+    <style>
+        .valid-lead {
+            background-color: #f5f9ff;
+            padding: 100px 0;
+        }
+        
+        .valid-lead-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .valid-lead-card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .valid-lead-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .valid-lead-icon {
+            flex: 0 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            background: linear-gradient(135deg, #0073e6, #0f2b5b);
+        }
+        
+        .valid-lead-card:nth-child(2) .valid-lead-icon {
+            background: linear-gradient(135deg, #ff6a00, #e65c00);
+        }
+        
+        .valid-lead-content {
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .valid-lead-content h3 {
+            color: #0f2b5b;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .criteria-list {
+            margin-top: 20px;
+        }
+        
+        .criteria-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .criteria-check, .criteria-cross {
+            flex: 0 0 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-right: 15px;
+            margin-top: 2px;
+        }
+        
+        .criteria-check {
+            background-color: #e6f4ff;
+            color: #0073e6;
+        }
+        
+        .criteria-cross {
+            background-color: #ffe6e6;
+            color: #e63c3c;
+        }
+        
+        .criteria-item p {
+            flex: 1;
+            margin: 0;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .payment-subtitle {
+            color: #666;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+        
+        .payment-divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 20px 0;
+        }
+        
+        .valid-lead-content h4 {
+            color: #0f2b5b;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 992px) {
+            .valid-lead-container {
+                flex-direction: column;
+            }
+            
+            .valid-lead-card {
+                width: 100%;
+            }
+        }
+    </style>
 
     <!-- Testimonials -->
     <section id="testimonials" class="section testimonials">
@@ -894,26 +1141,62 @@
             <p class="section-subtitle">See how RLC Agency has transformed HVAC businesses across the country</p>
             
             <div class="testimonial-container">
-                <div class="metrics-container">
-                    <div class="metric">
-                        <div class="metric-value">85%</div>
-                        <div class="metric-label">Average Conversion Rate</div>
-                    </div>
+                <div class="results-overview">
+                    <h3 class="results-title">The Results Speak for Themselves</h3>
                     
-                    <div class="metric">
-                        <div class="metric-value">4.2x</div>
-                        <div class="metric-label">Average ROI</div>
-                    </div>
-                    
-                    <div class="metric">
-                        <div class="metric-value">$780</div>
-                        <div class="metric-label">Avg. Value Per Call</div>
+                    <div class="metrics-container">
+                        <div class="metric">
+                            <div class="metric-circle">
+                                <div class="metric-value">85<span>%</span></div>
+                            </div>
+                            <div class="metric-label">Average Conversion Rate</div>
+                        </div>
+                        
+                        <div class="metric">
+                            <div class="metric-circle">
+                                <div class="metric-value">4.2<span>x</span></div>
+                            </div>
+                            <div class="metric-label">Average ROI</div>
+                        </div>
+                        
+                        <div class="metric">
+                            <div class="metric-circle">
+                                <div class="metric-value">$780</div>
+                            </div>
+                            <div class="metric-label">Avg. Value Per Call</div>
+                        </div>
+                        
+                        <div class="metric">
+                            <div class="metric-circle">
+                                <div class="metric-value">62<span>%</span></div>
+                            </div>
+                            <div class="metric-label">Reduced Acquisition Cost</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="testimonial-grid">
+                <div class="testimonial-wrapper">
                     <div class="testimonial-card">
-                        <p class="testimonial-quote">"Since partnering with RLC Agency, our customer acquisition cost has dropped by 62%. The quality of the HVAC leads is exceptional - these are homeowners ready to book services right away. We've seen a 215% increase in new installations and a 78% growth in service calls. The ROI is simply outstanding."</p>
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="testimonial-stats">
+                                <div class="stat">
+                                    <div class="stat-value">215%</div>
+                                    <div class="stat-label">Increase in Installations</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">78%</div>
+                                    <div class="stat-label">Growth in Service Calls</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-body">
+                            <p class="testimonial-quote">"Since partnering with RLC Agency, our customer acquisition cost has dropped by 62%. The quality of the HVAC leads is exceptional - these are homeowners ready to book services right away. Each call is direct from a homeowner with a real need. The return on our investment has been staggering - we're projecting a 340% increase in annual revenue this year alone."</p>
+                        </div>
+                        
                         <div class="testimonial-author">
                             <img src="/api/placeholder/60/60" alt="James Wilson" class="author-image">
                             <div class="author-info">
@@ -924,7 +1207,26 @@
                     </div>
                     
                     <div class="testimonial-card">
-                        <p class="testimonial-quote">"We wasted thousands on traditional advertising before finding RLC Agency. Now we only pay for actual HVAC leads from homeowners ready to book. Our business has grown 127% in just 8 months, and we've had to hire 3 new technicians to keep up with demand. Best marketing decision we've ever made."</p>
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="testimonial-stats">
+                                <div class="stat">
+                                    <div class="stat-value">127%</div>
+                                    <div class="stat-label">Business Growth</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">New Technicians Hired</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-body">
+                            <p class="testimonial-quote">"We wasted thousands on traditional advertising before finding RLC Agency. Now we only pay for actual HVAC leads from homeowners ready to book. These are real, direct calls from homeowners, not transfers. Our business has grown 127% in just 8 months, and we've had to hire 3 new technicians to keep up with demand. Every dollar spent has returned at least five."</p>
+                        </div>
+                        
                         <div class="testimonial-author">
                             <img src="/api/placeholder/60/60" alt="Sarah Johnson" class="author-image">
                             <div class="author-info">
@@ -935,7 +1237,26 @@
                     </div>
                     
                     <div class="testimonial-card">
-                        <p class="testimonial-quote">"The return on investment with RLC Agency is incredible. We're seeing a 380% ROI on every dollar spent. The leads come in pre-qualified and ready to convert. We've doubled our high-value installation jobs while cutting our marketing budget by 40%. I only wish we'd started with them sooner."</p>
+                        <div class="testimonial-header">
+                            <div class="testimonial-rating">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                            <div class="testimonial-stats">
+                                <div class="stat">
+                                    <div class="stat-value">380%</div>
+                                    <div class="stat-label">Return on Investment</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value">40%</div>
+                                    <div class="stat-label">Marketing Budget Reduction</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-body">
+                            <p class="testimonial-quote">"The return on investment with RLC Agency is incredible. We're seeing a 380% ROI on every dollar spent. The leads come in pre-qualified and ready to convert - all direct calls from homeowners needing our services immediately. We've doubled our high-value installation jobs while cutting our marketing budget by 40%. For every $1000 we spend with RLC Agency, we generate over $45,000 in new business."</p>
+                        </div>
+                        
                         <div class="testimonial-author">
                             <img src="/api/placeholder/60/60" alt="Michael Garcia" class="author-image">
                             <div class="author-info">
@@ -946,38 +1267,448 @@
                     </div>
                 </div>
                 
-                <div class="testimonial-chart">
-                    <h3 class="chart-title">Average Return on Investment by Month</h3>
-                    <div class="chart-container">
-                        <div class="chart-bar" style="height: 100px;">
-                            <div class="chart-bar-value">1.8x</div>
-                            <div class="chart-bar-label">Month 1</div>
+                <div class="roi-chart-container">
+                    <div class="roi-chart-header">
+                        <h3 class="roi-chart-title">Average Return on Investment by Month</h3>
+                        <p class="roi-chart-subtitle">Watch your ROI grow month after month with our proven lead generation system</p>
+                    </div>
+                    
+                    <div class="roi-chart">
+                        <div class="roi-axis-y">
+                            <div class="roi-axis-label">6.0x</div>
+                            <div class="roi-axis-label">5.0x</div>
+                            <div class="roi-axis-label">4.0x</div>
+                            <div class="roi-axis-label">3.0x</div>
+                            <div class="roi-axis-label">2.0x</div>
+                            <div class="roi-axis-label">1.0x</div>
+                            <div class="roi-axis-label">0.0x</div>
                         </div>
-                        <div class="chart-bar" style="height: 150px;">
-                            <div class="chart-bar-value">2.5x</div>
-                            <div class="chart-bar-label">Month 2</div>
-                        </div>
-                        <div class="chart-bar" style="height: 200px;">
-                            <div class="chart-bar-value">3.2x</div>
-                            <div class="chart-bar-label">Month 3</div>
-                        </div>
-                        <div class="chart-bar" style="height: 250px;">
-                            <div class="chart-bar-value">3.9x</div>
-                            <div class="chart-bar-label">Month 4</div>
-                        </div>
-                        <div class="chart-bar" style="height: 300px;">
-                            <div class="chart-bar-value">4.5x</div>
-                            <div class="chart-bar-label">Month 5</div>
-                        </div>
-                        <div class="chart-bar" style="height: 350px;">
-                            <div class="chart-bar-value">5.2x</div>
-                            <div class="chart-bar-label">Month 6</div>
+                        
+                        <div class="roi-bars">
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 15%;">
+                                    <div class="roi-bar-value">1.8x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 1</div>
+                            </div>
+                            
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 25%;">
+                                    <div class="roi-bar-value">2.5x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 2</div>
+                            </div>
+                            
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 35%;">
+                                    <div class="roi-bar-value">3.2x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 3</div>
+                            </div>
+                            
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 45%;">
+                                    <div class="roi-bar-value">3.9x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 4</div>
+                            </div>
+                            
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 55%;">
+                                    <div class="roi-bar-value">4.5x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 5</div>
+                            </div>
+                            
+                            <div class="roi-bar-wrapper">
+                                <div class="roi-bar" style="height: 65%;">
+                                    <div class="roi-bar-value">5.2x</div>
+                                </div>
+                                <div class="roi-bar-label">Month 6</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
+    <style>
+        /* Enhanced Testimonials Section */
+        .testimonials {
+            background-color: #fff;
+            padding: 100px 0;
+        }
+        
+        .results-overview {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .results-title {
+            font-size: 1.8rem;
+            color: #0f2b5b;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .results-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #0073e6, #0f2b5b);
+        }
+        
+        .metrics-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .metric {
+            flex: 0 0 200px;
+            text-align: center;
+        }
+        
+        .metric-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-circle:before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .metric:nth-child(1) .metric-circle {
+            background: linear-gradient(135deg, rgba(0, 115, 230, 0.1), rgba(0, 115, 230, 0.2));
+        }
+        
+        .metric:nth-child(2) .metric-circle {
+            background: linear-gradient(135deg, rgba(255, 106, 0, 0.1), rgba(255, 106, 0, 0.2));
+        }
+        
+        .metric:nth-child(3) .metric-circle {
+            background: linear-gradient(135deg, rgba(46, 184, 92, 0.1), rgba(46, 184, 92, 0.2));
+        }
+        
+        .metric:nth-child(4) .metric-circle {
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(156, 39, 176, 0.2));
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f2b5b;
+            line-height: 1;
+        }
+        
+        .metric:nth-child(1) .metric-value {
+            color: #0073e6;
+        }
+        
+        .metric:nth-child(2) .metric-value {
+            color: #ff6a00;
+        }
+        
+        .metric:nth-child(3) .metric-value {
+            color: #2eb85c;
+        }
+        
+        .metric:nth-child(4) .metric-value {
+            color: #9c27b0;
+        }
+        
+        .metric-value span {
+            font-size: 1.8rem;
+        }
+        
+        .metric-label {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        /* Testimonial Cards */
+        .testimonial-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-header {
+            background: linear-gradient(135deg, #f1f8ff, #e6f4ff);
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .testimonial-rating {
+            margin-bottom: 15px;
+            color: #ffb400;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .testimonial-stats {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0073e6;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .testimonial-body {
+            padding: 30px 25px;
+            flex: 1;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.7;
+            position: relative;
+            margin: 0;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            color: #0f2b5b;
+            margin: 0 0 5px;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        /* ROI Chart */
+        .roi-chart-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-top: 60px;
+        }
+        
+        .roi-chart-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .roi-chart-title {
+            font-size: 1.8rem;
+            color: #0f2b5b;
+            margin-bottom: 10px;
+        }
+        
+        .roi-chart-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .roi-chart {
+            display: flex;
+            height: 400px;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .roi-axis-y {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            padding-right: 20px;
+            width: 60px;
+        }
+        
+        .roi-axis-label {
+            color: #888;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        
+        .roi-bars {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            border-bottom: 2px solid #eee;
+            border-left: 2px solid #eee;
+            padding-left: 20px;
+            position: relative;
+            height: 350px;
+        }
+        
+        .roi-bars:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent calc(100% / 6 - 1px),
+                rgba(0, 0, 0, 0.05) calc(100% / 6 - 1px),
+                rgba(0, 0, 0, 0.05) calc(100% / 6)
+            );
+            pointer-events: none;
+        }
+        
+        .roi-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 12%;
+            max-width: 90px;
+            height: 100%;
+        }
+        
+        .roi-bar {
+            width: 70%;
+            max-width: 60px;
+            background: linear-gradient(to top, #0073e6, #36a0ff);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            transition: height 1s ease-out;
+        }
+        
+        .roi-bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f2b5b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .roi-bar-value:after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #0f2b5b transparent transparent transparent;
+        }
+        
+        .roi-bar-label {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        @media (max-width: 992px) {
+            .testimonial-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric {
+                flex: 0 0 calc(50% - 20px);
+                margin-bottom: 30px;
+            }
+            
+            .roi-chart {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .metric {
+                flex: 0 0 100%;
+            }
+            
+            .roi-bar-wrapper {
+                width: 15%;
+            }
+            
+            .roi-chart {
+                height: 300px;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 
     <!-- Contact -->
     <section id="contact" class="section contact">
@@ -989,33 +1720,57 @@
                     
                     <div class="contact-details">
                         <div class="contact-item">
-                            <div class="contact-icon">📱</div>
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
                             <div>
                                 <h4>Phone</h4>
-                                <p>(555) 123-4567</p>
+                                <p><a href="tel:6159623999" class="contact-link">(615) 962-3999</a></p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
-                            <div class="contact-icon">✉️</div>
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
                             <div>
                                 <h4>Email</h4>
-                                <p>info@rlc-agency.com</p>
+                                <p><a href="mailto:info@rlc-agency.com" class="contact-link">info@rlc-agency.com</a></p>
                             </div>
                         </div>
                         
                         <div class="contact-item">
-                            <div class="contact-icon">🏢</div>
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
                             <div>
                                 <h4>Address</h4>
                                 <p>123 Business Ave, Suite 500<br>Los Angeles, CA 90001</p>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="cta-container">
+                        <a href="tel:6159623999" class="btn btn-cta">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cta-icon">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            Call Now: (615) 962-3999
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="contact-form">
                     <h3 class="contact-form-title">Get Started Today</h3>
+                    <p class="contact-form-subtitle">Fill out the form below and we'll contact you to discuss how we can help your HVAC business grow</p>
                     <form>
                         <div class="form-group">
                             <label for="name" class="form-label">Full Name</label>
@@ -1047,12 +1802,224 @@
                             <textarea id="message" class="form-textarea"></textarea>
                         </div>
                         
-                        <button type="submit" class="btn">Request Information</button>
+                        <button type="submit" class="btn btn-submit">Submit Request</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    
+    <style>
+        /* Enhanced Contact Section */
+        .contact {
+            background: linear-gradient(rgba(15, 43, 91, 0.95), rgba(15, 43, 91, 0.95)), url('/api/placeholder/1200/500') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #ff6a00;
+        }
+        
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+        
+        .contact-details {
+            margin-bottom: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: #ff6a00;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: #ff6a00;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .contact-item p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .contact-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: #ff6a00;
+        }
+        
+        .cta-container {
+            margin-top: 40px;
+        }
+        
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #ff6a00;
+            color: white;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(255, 106, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            background-color: #ff8124;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 106, 0, 0.4);
+        }
+        
+        .cta-icon {
+            margin-right: 10px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-form-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #0f2b5b;
+        }
+        
+        .contact-form-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            border-color: #0073e6;
+            outline: none;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 115, 230, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background-color: #0073e6;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0, 115, 230, 0.2);
+        }
+        
+        .btn-submit:hover {
+            background-color: #0062c4;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 115, 230, 0.3);
+        }
+        
+        @media (max-width: 992px) {
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .contact-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-form {
+                margin-top: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 
     <!-- Footer -->
     <footer>
@@ -1095,7 +2062,7 @@
                     <h3 class="footer-title">Contact Us</h3>
                     <ul class="footer-links">
                         <li class="footer-link">
-                            <a href="tel:5551234567" class="footer-link-anchor">(555) 123-4567</a>
+                            <a href="tel:6159623999" class="footer-link-anchor">(615) 962-3999</a>
                         </li>
                         <li class="footer-link">
                             <a href="mailto:info@rlc-agency.com" class="footer-link-anchor">info@rlc-agency.com</a>
@@ -1113,35 +2080,97 @@
         </div>
     </footer>
 
-    <!-- Script to animate chart bars on scroll -->
+    <!-- Script for mobile menu and animations -->
     <script>
-        // Simple script to animate chart bars when they come into view
         document.addEventListener('DOMContentLoaded', function() {
-            const bars = document.querySelectorAll('.chart-bar');
-            bars.forEach(bar => {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const body = document.body;
+            
+            // Create overlay element
+            const overlay = document.createElement('div');
+            overlay.className = 'menu-overlay';
+            body.appendChild(overlay);
+            
+            // Toggle menu function
+            function toggleMenu() {
+                mainNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            }
+            
+            // Event listeners
+            menuToggle.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+            
+            // Close menu when clicking on a nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                });
+            });
+            
+            // Animate ROI chart bars when they come into view
+            const roiBars = document.querySelectorAll('.roi-bar');
+            roiBars.forEach(bar => {
                 bar.style.height = '0';
             });
             
-            const observer = new IntersectionObserver((entries) => {
+            const observeRoiChart = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const bars = document.querySelectorAll('.chart-bar');
-                        bars.forEach(bar => {
-                            const targetHeight = bar.style.height;
-                            bar.style.height = '0';
-                            setTimeout(() => {
-                                bar.style.transition = 'height 1s ease-out';
-                                bar.style.height = targetHeight;
-                            }, 200);
-                        });
-                        observer.unobserve(entry.target);
+                        setTimeout(() => {
+                            roiBars.forEach((bar, index) => {
+                                const targetHeight = bar.style.height;
+                                bar.style.height = '0';
+                                setTimeout(() => {
+                                    bar.style.transition = 'height 1s ease-out';
+                                    bar.style.height = targetHeight;
+                                }, index * 150);
+                            });
+                        }, 400);
+                        observeRoiChart.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.3 });
             
-            const chart = document.querySelector('.testimonial-chart');
-            if (chart) {
-                observer.observe(chart);
+            const roiChart = document.querySelector('.roi-chart');
+            if (roiChart) {
+                observeRoiChart.observe(roiChart);
+            }
+            
+            // Animate metrics when they come into view
+            const metrics = document.querySelectorAll('.metric-circle');
+            metrics.forEach(metric => {
+                metric.style.transform = 'scale(0.5)';
+                metric.style.opacity = '0';
+            });
+            
+            const observeMetrics = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            metrics.forEach((metric, index) => {
+                                setTimeout(() => {
+                                    metric.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                                    metric.style.transform = 'scale(1)';
+                                    metric.style.opacity = '1';
+                                }, index * 150);
+                            });
+                        }, 400);
+                        observeMetrics.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            const metricsContainer = document.querySelector('.metrics-container');
+            if (metricsContainer) {
+                observeMetrics.observe(metricsContainer);
             }
         });
     </script>
