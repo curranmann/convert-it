@@ -1767,44 +1767,6 @@
                         </a>
                     </div>
                 </div>
-                
-                <div class="contact-form">
-                    <h3 class="contact-form-title">Get Started Today</h3>
-                    <p class="contact-form-subtitle">Fill out the form below and we'll contact you to discuss how we can help your HVAC business grow</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" id="name" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company" class="form-label">Company Name</label>
-                            <input type="text" id="company" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email Address</label>
-                            <input type="email" id="email" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="phone" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service-area" class="form-label">Service Area (Cities/ZIP Codes)</label>
-                            <input type="text" id="service-area" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message" class="form-label">Additional Information</label>
-                            <textarea id="message" class="form-textarea"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-submit">Submit Request</button>
-                    </form>
-                </div>
             </div>
         </div>
     </section>
@@ -1819,12 +1781,12 @@
         
         .contact-content {
             display: flex;
-            justify-content: space-between;
-            gap: 50px;
+            justify-content: center;
         }
         
         .contact-info {
-            flex: 1;
+            max-width: 800px;
+            text-align: center;
         }
         
         .contact-title {
@@ -1833,13 +1795,15 @@
             color: white;
             position: relative;
             padding-bottom: 15px;
+            text-align: center;
         }
         
         .contact-title:after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 80px;
             height: 3px;
             background: #ff6a00;
@@ -1853,13 +1817,26 @@
         }
         
         .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
             margin-bottom: 40px;
         }
         
         .contact-item {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            min-width: 220px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
         }
         
         .contact-icon {
@@ -1879,19 +1856,20 @@
         .contact-item:hover .contact-icon {
             background: #ff6a00;
             color: white;
-            transform: translateY(-3px);
         }
         
         .contact-item h4 {
             font-size: 1.2rem;
             margin-bottom: 5px;
             color: white;
+            text-align: left;
         }
         
         .contact-item p {
             font-size: 1rem;
             margin-bottom: 0;
             color: rgba(255, 255, 255, 0.8);
+            text-align: left;
         }
         
         .contact-link {
@@ -1930,91 +1908,17 @@
             margin-right: 10px;
         }
         
-        .contact-form {
-            flex: 1;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-        }
-        
-        .contact-form-title {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #0f2b5b;
-        }
-        
-        .contact-form-subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: #555;
-            font-weight: 600;
-        }
-        
-        .form-input, .form-textarea {
-            width: 100%;
-            padding: 14px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background-color: #f9f9f9;
-        }
-        
-        .form-input:focus, .form-textarea:focus {
-            border-color: #0073e6;
-            outline: none;
-            background-color: white;
-            box-shadow: 0 5px 15px rgba(0, 115, 230, 0.1);
-        }
-        
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .btn-submit {
-            background-color: #0073e6;
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            margin-top: 10px;
-            box-shadow: 0 10px 30px rgba(0, 115, 230, 0.2);
-        }
-        
-        .btn-submit:hover {
-            background-color: #0062c4;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 115, 230, 0.3);
-        }
-        
-        @media (max-width: 992px) {
-            .contact-content {
-                flex-direction: column;
-            }
-            
-            .contact-title {
-                font-size: 2.2rem;
-            }
-            
-            .contact-form {
-                margin-top: 40px;
-            }
-        }
-        
         @media (max-width: 768px) {
+            .contact-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
             .contact-title {
                 font-size: 2rem;
             }
