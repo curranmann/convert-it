@@ -1198,7 +1198,10 @@
                         </div>
                         
                         <div class="testimonial-author">
-                            <img src="/api/placeholder/60/60" alt="James Wilson" class="author-image">
+                            <div class="author-image-container">
+                                <img src="/api/placeholder/150/150" alt="James Wilson" class="author-image">
+                                <!-- Replace with AI-generated headshot for James Wilson - casual HVAC business owner, 40s, male -->
+                            </div>
                             <div class="author-info">
                                 <h4>James Wilson</h4>
                                 <p>Wilson HVAC Services</p>
@@ -1228,7 +1231,10 @@
                         </div>
                         
                         <div class="testimonial-author">
-                            <img src="/api/placeholder/60/60" alt="Sarah Johnson" class="author-image">
+                            <div class="author-image-container">
+                                <img src="/api/placeholder/150/150" alt="Sarah Johnson" class="author-image">
+                                <!-- Replace with AI-generated headshot for Sarah Johnson - female HVAC business owner, 30s -->
+                            </div>
                             <div class="author-info">
                                 <h4>Sarah Johnson</h4>
                                 <p>Comfort Air Solutions</p>
@@ -1258,7 +1264,10 @@
                         </div>
                         
                         <div class="testimonial-author">
-                            <img src="/api/placeholder/60/60" alt="Michael Garcia" class="author-image">
+                            <div class="author-image-container">
+                                <img src="/api/placeholder/150/150" alt="Michael Garcia" class="author-image">
+                                <!-- Replace with AI-generated headshot for Michael Garcia - Hispanic HVAC business owner, 40s -->
+                            </div>
                             <div class="author-info">
                                 <h4>Michael Garcia</h4>
                                 <p>Premier Heating & Cooling</p>
@@ -1275,54 +1284,54 @@
                     
                     <div class="roi-chart">
                         <div class="roi-axis-y">
-                            <div class="roi-axis-label">6.0x</div>
-                            <div class="roi-axis-label">5.0x</div>
-                            <div class="roi-axis-label">4.0x</div>
                             <div class="roi-axis-label">3.0x</div>
+                            <div class="roi-axis-label">2.5x</div>
                             <div class="roi-axis-label">2.0x</div>
+                            <div class="roi-axis-label">1.5x</div>
                             <div class="roi-axis-label">1.0x</div>
+                            <div class="roi-axis-label">0.5x</div>
                             <div class="roi-axis-label">0.0x</div>
                         </div>
                         
                         <div class="roi-bars">
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 15%;">
-                                    <div class="roi-bar-value">1.8x</div>
+                                <div class="roi-bar" style="height: 80px;">
+                                    <div class="roi-bar-value">1.2x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 1</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 25%;">
-                                    <div class="roi-bar-value">2.5x</div>
+                                <div class="roi-bar" style="height: 100px;">
+                                    <div class="roi-bar-value">1.5x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 2</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 35%;">
-                                    <div class="roi-bar-value">3.2x</div>
+                                <div class="roi-bar" style="height: 120px;">
+                                    <div class="roi-bar-value">1.8x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 3</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 45%;">
-                                    <div class="roi-bar-value">3.9x</div>
+                                <div class="roi-bar" style="height: 140px;">
+                                    <div class="roi-bar-value">2.0x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 4</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 55%;">
-                                    <div class="roi-bar-value">4.5x</div>
+                                <div class="roi-bar" style="height: 160px;">
+                                    <div class="roi-bar-value">2.2x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 5</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 65%;">
-                                    <div class="roi-bar-value">5.2x</div>
+                                <div class="roi-bar" style="height: 180px;">
+                                    <div class="roi-bar-value">2.5x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 6</div>
                             </div>
@@ -1529,13 +1538,23 @@
             border-top: 1px solid #eee;
         }
         
-        .author-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .author-image-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
             margin-right: 15px;
+            border-radius: 50%;
+            overflow: hidden;
             border: 3px solid white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .author-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 50%;
         }
         
         .author-info h4 {
@@ -1557,6 +1576,7 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             padding: 40px;
             margin-top: 60px;
+            border: 1px solid #e5e5e5;
         }
         
         .roi-chart-header {
@@ -1580,6 +1600,10 @@
             height: 400px;
             margin-top: 50px;
             position: relative;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #eaeaea;
         }
         
         .roi-axis-y {
@@ -1591,8 +1615,9 @@
         }
         
         .roi-axis-label {
-            color: #888;
+            color: #555;
             font-size: 0.9rem;
+            font-weight: 600;
             text-align: right;
         }
         
@@ -1601,8 +1626,8 @@
             display: flex;
             justify-content: space-around;
             align-items: flex-end;
-            border-bottom: 2px solid #eee;
-            border-left: 2px solid #eee;
+            border-bottom: 2px solid #ddd;
+            border-left: 2px solid #ddd;
             padding-left: 20px;
             position: relative;
             height: 350px;
@@ -1619,8 +1644,8 @@
                 to bottom,
                 transparent,
                 transparent calc(100% / 6 - 1px),
-                rgba(0, 0, 0, 0.05) calc(100% / 6 - 1px),
-                rgba(0, 0, 0, 0.05) calc(100% / 6)
+                rgba(0, 0, 0, 0.08) calc(100% / 6 - 1px),
+                rgba(0, 0, 0, 0.08) calc(100% / 6)
             );
             pointer-events: none;
         }
@@ -1637,24 +1662,27 @@
         .roi-bar {
             width: 70%;
             max-width: 60px;
-            background: linear-gradient(to top, #0073e6, #36a0ff);
+            background: linear-gradient(to top, #0057b3, #36a0ff);
             border-radius: 6px 6px 0 0;
             position: relative;
             transition: height 1s ease-out;
+            bottom: 0;
+            box-shadow: 0 3px 10px rgba(0, 87, 179, 0.2);
         }
         
         .roi-bar-value {
             position: absolute;
-            top: -30px;
+            top: -35px;
             left: 50%;
             transform: translateX(-50%);
             background: #0f2b5b;
             color: white;
             padding: 5px 10px;
             border-radius: 5px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
             white-space: nowrap;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
         
         .roi-bar-value:after {
@@ -1670,8 +1698,8 @@
         
         .roi-bar-label {
             margin-top: 15px;
-            color: #666;
-            font-size: 0.9rem;
+            color: #444;
+            font-size: 0.95rem;
             font-weight: 600;
             text-align: center;
         }
@@ -1984,45 +2012,52 @@
         </div>
     </footer>
 
-    <!-- Script for mobile menu and animations -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const menuToggle = document.getElementById('mobile-menu-toggle');
-            const mainNav = document.getElementById('main-nav');
-            const body = document.body;
-            
-            // Create overlay element
-            const overlay = document.createElement('div');
-            overlay.className = 'menu-overlay';
-            body.appendChild(overlay);
-            
-            // Toggle menu function
-            function toggleMenu() {
-                mainNav.classList.toggle('active');
-                overlay.classList.toggle('active');
-                menuToggle.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            }
-            
-            // Event listeners
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        const body = document.body;
+        
+        // Create overlay element
+        const overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        body.appendChild(overlay);
+        
+        // Toggle menu function
+        function toggleMenu() {
+            mainNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        }
+        
+        // Event listeners
+        if(menuToggle) {
             menuToggle.addEventListener('click', toggleMenu);
             overlay.addEventListener('click', toggleMenu);
-            
-            // Close menu when clicking on a nav link
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mainNav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                });
+        }
+        
+        // Close menu when clicking on a nav link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav && mainNav.classList.contains('active')) {
+                    toggleMenu();
+                }
             });
-            
-            // Animate ROI chart bars when they come into view
-            const roiBars = document.querySelectorAll('.roi-bar');
+        });
+        
+        // Animate ROI chart bars when they come into view
+        const roiBars = document.querySelectorAll('.roi-bar');
+        
+        if(roiBars.length > 0) {
+            // Store original heights
+            const originalHeights = [];
             roiBars.forEach(bar => {
-                bar.style.height = '0';
+                originalHeights.push(bar.style.height);
+                bar.style.height = '0px';
             });
             
             const observeRoiChart = new IntersectionObserver((entries) => {
@@ -2030,11 +2065,9 @@
                     if (entry.isIntersecting) {
                         setTimeout(() => {
                             roiBars.forEach((bar, index) => {
-                                const targetHeight = bar.style.height;
-                                bar.style.height = '0';
                                 setTimeout(() => {
                                     bar.style.transition = 'height 1s ease-out';
-                                    bar.style.height = targetHeight;
+                                    bar.style.height = originalHeights[index];
                                 }, index * 150);
                             });
                         }, 400);
@@ -2047,9 +2080,11 @@
             if (roiChart) {
                 observeRoiChart.observe(roiChart);
             }
-            
-            // Animate metrics when they come into view
-            const metrics = document.querySelectorAll('.metric-circle');
+        }
+        
+        // Animate metrics when they come into view
+        const metrics = document.querySelectorAll('.metric-circle');
+        if(metrics.length > 0) {
             metrics.forEach(metric => {
                 metric.style.transform = 'scale(0.5)';
                 metric.style.opacity = '0';
@@ -2076,7 +2111,8 @@
             if (metricsContainer) {
                 observeMetrics.observe(metricsContainer);
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
