@@ -231,18 +231,76 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .benefit-icon {
-            font-size: 40px;
-            color: #ff6a00;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            width: 80px;
+            height: 80px;
+            background-color: #f7f7f7;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit:hover .benefit-icon {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 106, 0, 0.15);
+            background-color: #fff8f3;
         }
         
         .benefit-title {
             font-size: 1.3rem;
             margin-bottom: 15px;
             color: #0f2b5b;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .benefit p {
+            color: #666;
+            text-align: center;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .benefit {
+                padding: 25px 20px;
+            }
+            
+            .benefit-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+            }
+            
+            .benefit-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .benefit-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .benefit-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .benefit-title {
+                font-size: 1.2rem;
+            }
         }
         
         /* Account Dashboard */
@@ -854,37 +912,71 @@
             
             <div class="benefits-grid">
                 <div class="benefit">
-                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Exclusive Leads</h3>
                     <p>Every lead is exclusively yours - we never sell the same lead to multiple companies.</p>
                 </div>
                 
                 <div class="benefit">
-                    <div class="benefit-icon">📱</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            <path d="M18 2c-2.4 0-4.36 2.02-5 3"></path>
+                            <line x1="14" y1="6" x2="16.5" y2="3.5"></line>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Direct Homeowner Calls</h3>
                     <p>Receive calls directly from homeowners actively seeking HVAC services - no transfers, just real customers ready for service.</p>
                 </div>
                 
                 <div class="benefit">
-                    <div class="benefit-icon">💰</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Pay Per Valid Call</h3>
                     <p>Only pay for qualified leads - homeowners in your service area looking for HVAC services.</p>
                 </div>
                 
                 <div class="benefit">
-                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Detailed Reporting</h3>
                     <p>Access comprehensive call analytics and conversion data to track your ROI.</p>
                 </div>
                 
                 <div class="benefit">
-                    <div class="benefit-icon">🔍</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="11" y1="8" x2="11" y2="14"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Quality Verification</h3>
                     <p>Every call is screened to ensure it meets our strict qualification criteria.</p>
                 </div>
                 
                 <div class="benefit">
-                    <div class="benefit-icon">🔄</div>
+                    <div class="benefit-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#ff6a00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M10 8v8l6-4-6-4z"></path>
+                        </svg>
+                    </div>
                     <h3 class="benefit-title">Flexible Volume</h3>
                     <p>Scale your lead volume up or down based on your capacity and business needs.</p>
                 </div>
@@ -1284,53 +1376,53 @@
                     
                     <div class="roi-chart">
                         <div class="roi-axis-y">
-                            <div class="roi-axis-label">3.0x</div>
-                            <div class="roi-axis-label">2.5x</div>
-                            <div class="roi-axis-label">2.0x</div>
-                            <div class="roi-axis-label">1.5x</div>
-                            <div class="roi-axis-label">1.0x</div>
-                            <div class="roi-axis-label">0.5x</div>
                             <div class="roi-axis-label">0.0x</div>
+                            <div class="roi-axis-label">0.5x</div>
+                            <div class="roi-axis-label">1.0x</div>
+                            <div class="roi-axis-label">1.5x</div>
+                            <div class="roi-axis-label">2.0x</div>
+                            <div class="roi-axis-label">2.5x</div>
+                            <div class="roi-axis-label">3.0x</div>
                         </div>
                         
                         <div class="roi-bars">
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 80px;">
+                                <div class="roi-bar" style="height: 80px;" data-height="80px">
                                     <div class="roi-bar-value">1.2x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 1</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 100px;">
+                                <div class="roi-bar" style="height: 100px;" data-height="100px">
                                     <div class="roi-bar-value">1.5x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 2</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 120px;">
+                                <div class="roi-bar" style="height: 120px;" data-height="120px">
                                     <div class="roi-bar-value">1.8x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 3</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 140px;">
+                                <div class="roi-bar" style="height: 140px;" data-height="140px">
                                     <div class="roi-bar-value">2.0x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 4</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 160px;">
+                                <div class="roi-bar" style="height: 160px;" data-height="160px">
                                     <div class="roi-bar-value">2.2x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 5</div>
                             </div>
                             
                             <div class="roi-bar-wrapper">
-                                <div class="roi-bar" style="height: 180px;">
+                                <div class="roi-bar" style="height: 180px;" data-height="180px">
                                     <div class="roi-bar-value">2.5x</div>
                                 </div>
                                 <div class="roi-bar-label">Month 6</div>
@@ -1608,7 +1700,7 @@
         
         .roi-axis-y {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             justify-content: space-between;
             padding-right: 20px;
             width: 60px;
@@ -1641,7 +1733,7 @@
             bottom: 0;
             top: 0;
             background: repeating-linear-gradient(
-                to bottom,
+                to top,
                 transparent,
                 transparent calc(100% / 6 - 1px),
                 rgba(0, 0, 0, 0.08) calc(100% / 6 - 1px),
@@ -1666,8 +1758,8 @@
             border-radius: 6px 6px 0 0;
             position: relative;
             transition: height 1s ease-out;
-            bottom: 0;
             box-shadow: 0 3px 10px rgba(0, 87, 179, 0.2);
+            align-self: flex-end;
         }
         
         .roi-bar-value {
@@ -1702,6 +1794,165 @@
             font-size: 0.95rem;
             font-weight: 600;
             text-align: center;
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .roi-chart-container {
+                padding: 30px;
+            }
+            
+            .roi-chart {
+                height: 350px;
+                margin-top: 30px;
+                padding-bottom: 50px;
+            }
+            
+            .roi-bars {
+                height: 280px;
+            }
+            
+            .roi-chart-title {
+                font-size: 1.6rem;
+            }
+            
+            .roi-bar-label {
+                bottom: -35px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .roi-chart-container {
+                padding: 20px;
+                margin-top: 40px;
+            }
+            
+            .roi-chart {
+                height: 350px;
+                padding: 15px 15px 60px;
+                margin-top: 20px;
+            }
+            
+            .roi-bars {
+                height: 250px;
+                padding-left: 10px;
+            }
+            
+            .roi-axis-y {
+                width: 50px;
+                padding-right: 10px;
+            }
+            
+            .roi-axis-label {
+                font-size: 0.8rem;
+            }
+            
+            .roi-bar-wrapper {
+                width: 14%;
+            }
+            
+            .roi-bar {
+                width: 85%;
+            }
+            
+            /* Stagger the value indicators on tablet */
+            .roi-bar-wrapper:nth-child(even) .roi-bar-value {
+                top: -60px;
+            }
+            
+            .roi-bar-value {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                top: -35px;
+            }
+            
+            .roi-bar-label {
+                font-size: 0.8rem;
+                bottom: -40px;
+            }
+            
+            .roi-chart-title {
+                font-size: 1.4rem;
+            }
+            
+            .roi-chart-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .roi-chart-container {
+                padding: 15px;
+            }
+            
+            .roi-chart {
+                height: 300px;
+                padding: 10px 10px 70px 5px;
+            }
+            
+            .roi-bars {
+                height: 200px;
+                padding-left: 5px;
+            }
+            
+            .roi-axis-y {
+                width: 35px;
+                padding-right: 5px;
+            }
+            
+            .roi-axis-label {
+                font-size: 0.7rem;
+            }
+            
+            .roi-bar-wrapper {
+                width: 16%;
+            }
+            
+            /* Only display every other bar label on mobile */
+            .roi-bar-wrapper:nth-child(odd) .roi-bar-label {
+                opacity: 0.5;
+                font-size: 0.7rem;
+            }
+            
+            /* Stagger the value indicators even more on mobile */
+            .roi-bar-wrapper:nth-child(1) .roi-bar-value,
+            .roi-bar-wrapper:nth-child(3) .roi-bar-value,
+            .roi-bar-wrapper:nth-child(5) .roi-bar-value {
+                top: -35px;
+            }
+            
+            .roi-bar-wrapper:nth-child(2) .roi-bar-value,
+            .roi-bar-wrapper:nth-child(4) .roi-bar-value,
+            .roi-bar-wrapper:nth-child(6) .roi-bar-value {
+                top: -65px;
+            }
+            
+            .roi-bar {
+                width: 70%;
+            }
+            
+            .roi-bar-value {
+                font-size: 0.7rem;
+                padding: 3px 6px;
+                min-width: 36px;
+                text-align: center;
+            }
+            
+            .roi-bar-label {
+                font-size: 0.7rem;
+                bottom: -45px;
+            }
+            
+            .roi-chart-title {
+                font-size: 1.2rem;
+            }
+            
+            .roi-chart-subtitle {
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 992px) {
@@ -2053,28 +2304,39 @@
         const roiBars = document.querySelectorAll('.roi-bar');
         
         if(roiBars.length > 0) {
-            // Store original heights
-            const originalHeights = [];
+            // Store original heights from data attribute and initially set all to 0
             roiBars.forEach(bar => {
-                originalHeights.push(bar.style.height);
+                const originalHeight = bar.getAttribute('data-height');
+                // Start with no height
                 bar.style.height = '0px';
+                
+                // Store in a data attribute for responsive designs
+                if (originalHeight) {
+                    bar.setAttribute('data-original-height', originalHeight);
+                }
             });
             
+            function animateBars() {
+                roiBars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        const originalHeight = bar.getAttribute('data-height');
+                        if (originalHeight) {
+                            bar.style.transition = 'height 1s ease-out';
+                            bar.style.height = originalHeight;
+                        }
+                    }, index * 150);
+                });
+            }
+            
+            // Use Intersection Observer for animation
             const observeRoiChart = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            roiBars.forEach((bar, index) => {
-                                setTimeout(() => {
-                                    bar.style.transition = 'height 1s ease-out';
-                                    bar.style.height = originalHeights[index];
-                                }, index * 150);
-                            });
-                        }, 400);
+                        setTimeout(animateBars, 400);
                         observeRoiChart.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.3 });
+            }, { threshold: 0.2 });
             
             const roiChart = document.querySelector('.roi-chart');
             if (roiChart) {
