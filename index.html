@@ -167,7 +167,19 @@
         
         /* How It Works */
         .how-it-works {
-            background-color: white;
+            background-color: #fafbff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #0073e6, #ff6a00);
         }
         
         .steps {
@@ -175,16 +187,30 @@
             flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 40px;
+            position: relative;
         }
         
         .step {
             flex-basis: calc(33.33% - 30px);
             text-align: center;
-            padding: 30px;
-            border-radius: 8px;
+            padding: 40px 30px;
+            border-radius: 12px;
             background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .step:nth-child(1) {
+            border-bottom-color: #0073e6;
+        }
+        
+        .step:nth-child(2) {
+            border-bottom-color: #5f43b2;
+        }
+        
+        .step:nth-child(3) {
+            border-bottom-color: #ff6a00;
         }
         
         .step:hover {
@@ -195,14 +221,30 @@
         .step-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 20px;
-            background-color: #f1f8ff;
+            margin: 0 auto 25px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 30px;
-            color: #0073e6;
+            color: white;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .step:nth-child(1) .step-icon {
+            background: linear-gradient(135deg, #0073e6, #36a0ff);
+            box-shadow: 0 5px 15px rgba(0, 115, 230, 0.3);
+        }
+        
+        .step:nth-child(2) .step-icon {
+            background: linear-gradient(135deg, #5f43b2, #9882e6);
+            box-shadow: 0 5px 15px rgba(95, 67, 178, 0.3);
+        }
+        
+        .step:nth-child(3) .step-icon {
+            background: linear-gradient(135deg, #ff6a00, #ffaa6a);
+            box-shadow: 0 5px 15px rgba(255, 106, 0, 0.3);
         }
         
         .step-title {
@@ -213,6 +255,7 @@
         
         .step-description {
             color: #666;
+            line-height: 1.6;
         }
         
         /* Benefits */
