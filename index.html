@@ -2315,116 +2315,137 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('mobile-menu-toggle');
-        const mainNav = document.getElementById('main-nav');
-        const body = document.body;
-        
-        // Create overlay element
-        const overlay = document.createElement('div');
-        overlay.className = 'menu-overlay';
-        body.appendChild(overlay);
-        
-        // Toggle menu function
-        function toggleMenu() {
-            mainNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        }
-        
-        // Event listeners
-        if(menuToggle) {
-            menuToggle.addEventListener('click', toggleMenu);
-            overlay.addEventListener('click', toggleMenu);
-        }
-        
-        // Close menu when clicking on a nav link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainNav && mainNav.classList.contains('active')) {
-                    toggleMenu();
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    const body = document.body;
+    
+    // Create overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    body.appendChild(overlay);
+    
+    // Toggle menu function
+    function toggleMenu() {
+        mainNav.classList.toggle('active');
+        overlay.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    }
+    
+    // Event listeners
+    if(menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    }
+    
+    // Close menu when clicking on a nav link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Get the href attribute
+            const href = this.getAttribute('href');
+            
+            // Only handle internal links (those starting with #)
+            if (href && href.startsWith('#')) {
+                // Get the target element
+                const targetElement = document.querySelector(href);
+                
+                if (targetElement) {
+                    // Close the mobile menu if it's open
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                    
+                    // Small delay to allow menu to close before scrolling
+                    setTimeout(() => {
+                        // Scroll to the element
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 300);
                 }
-            });
+            }
+        });
+    });
+    
+    // Animate ROI chart bars when they come into view
+    const roiBars = document.querySelectorAll('.roi-bar');
+    
+    if(roiBars.length > 0) {
+        // Store original heights from data attribute and initially set all to 0
+        roiBars.forEach(bar => {
+            const originalHeight = bar.getAttribute('data-height');
+            // Start with no height
+            bar.style.height = '0px';
+            
+            // Store in a data attribute for responsive designs
+            if (originalHeight) {
+                bar.setAttribute('data-original-height', originalHeight);
+            }
         });
         
-        // Animate ROI chart bars when they come into view
-        const roiBars = document.querySelectorAll('.roi-bar');
+        function animateBars() {
+            roiBars.forEach((bar, index) => {
+                setTimeout(() => {
+                    const originalHeight = bar.getAttribute('data-height');
+                    if (originalHeight) {
+                        bar.style.transition = 'height 1s ease-out';
+                        bar.style.height = originalHeight;
+                    }
+                }, index * 150);
+            });
+        }
         
-        if(roiBars.length > 0) {
-            // Store original heights from data attribute and initially set all to 0
-            roiBars.forEach(bar => {
-                const originalHeight = bar.getAttribute('data-height');
-                // Start with no height
-                bar.style.height = '0px';
-                
-                // Store in a data attribute for responsive designs
-                if (originalHeight) {
-                    bar.setAttribute('data-original-height', originalHeight);
+        // Use Intersection Observer for animation
+        const observeRoiChart = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(animateBars, 400);
+                    observeRoiChart.unobserve(entry.target);
                 }
             });
-            
-            function animateBars() {
-                roiBars.forEach((bar, index) => {
-                    setTimeout(() => {
-                        const originalHeight = bar.getAttribute('data-height');
-                        if (originalHeight) {
-                            bar.style.transition = 'height 1s ease-out';
-                            bar.style.height = originalHeight;
-                        }
-                    }, index * 150);
-                });
-            }
-            
-            // Use Intersection Observer for animation
-            const observeRoiChart = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(animateBars, 400);
-                        observeRoiChart.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-            
-            const roiChart = document.querySelector('.roi-chart');
-            if (roiChart) {
-                observeRoiChart.observe(roiChart);
-            }
-        }
+        }, { threshold: 0.2 });
         
-        // Animate metrics when they come into view
-        const metrics = document.querySelectorAll('.metric-circle');
-        if(metrics.length > 0) {
-            metrics.forEach(metric => {
-                metric.style.transform = 'scale(0.5)';
-                metric.style.opacity = '0';
-            });
-            
-            const observeMetrics = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            metrics.forEach((metric, index) => {
-                                setTimeout(() => {
-                                    metric.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                                    metric.style.transform = 'scale(1)';
-                                    metric.style.opacity = '1';
-                                }, index * 150);
-                            });
-                        }, 400);
-                        observeMetrics.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-            
-            const metricsContainer = document.querySelector('.metrics-container');
-            if (metricsContainer) {
-                observeMetrics.observe(metricsContainer);
-            }
+        const roiChart = document.querySelector('.roi-chart');
+        if (roiChart) {
+            observeRoiChart.observe(roiChart);
         }
-    });
+    }
+    
+    // Animate metrics when they come into view
+    const metrics = document.querySelectorAll('.metric-circle');
+    if(metrics.length > 0) {
+        metrics.forEach(metric => {
+            metric.style.transform = 'scale(0.5)';
+            metric.style.opacity = '0';
+        });
+        
+        const observeMetrics = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        metrics.forEach((metric, index) => {
+                            setTimeout(() => {
+                                metric.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                                metric.style.transform = 'scale(1)';
+                                metric.style.opacity = '1';
+                            }, index * 150);
+                        });
+                    }, 400);
+                    observeMetrics.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        const metricsContainer = document.querySelector('.metrics-container');
+        if (metricsContainer) {
+            observeMetrics.observe(metricsContainer);
+        }
+    }
+});
 </script>
 </body>
 </html>
