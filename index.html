@@ -1622,29 +1622,24 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
-/* Repositioning testimonial ratings below KPIs */
-.testimonial-header {
-    display: flex;
-    flex-direction: column;
-}
-
-.testimonial-stats {
-    order: 1; /* Display first */
-    margin-bottom: 15px; /* Add space between stats and stars */
-}
-
-.testimonial-rating {
-    order: 2; /* Display second */
-    margin-top: 0;
-    margin-bottom: 0;
-    text-align: center;
-    background: rgba(255, 180, 0, 0.1); /* Add subtle background */
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    align-self: center; /* Center the rating box */
-    width: auto;
-}
+        .testimonial-header {
+            background: linear-gradient(135deg, #f1f8ff, #e6f4ff);
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .testimonial-rating {
+            margin-bottom: 15px;
+            color: #ffb400;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-align: center; /* Add this line to center the stars */
+        }
+        
+        .testimonial-stats {
+            display: flex;
+            justify-content: space-between;
+        }
         
         .stat {
             text-align: center;
@@ -2433,6 +2428,7 @@
 </script>
 </body>
 </html>
+
 
 
 
