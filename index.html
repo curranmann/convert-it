@@ -97,6 +97,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
         
         .header-container {
@@ -104,6 +105,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
+            width: 100%;
         }
         
         .logo {
@@ -121,6 +123,8 @@
         .nav-list {
             display: flex;
             list-style: none;
+            margin: 0;
+            padding: 0;
         }
         
         .nav-item {
@@ -140,6 +144,26 @@
         
         .nav-btn {
             margin-left: 30px;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #0f2b5b;
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
         
         /* Hero Section */
@@ -748,26 +772,6 @@
             color: #ccc;
         }
         
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 40px;
-            height: 21px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        
-        .mobile-menu-toggle span {
-            display: block;
-            height: 4px;
-            width: 100%;
-            background-color: #0f2b5b;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        
         /* Responsive */
         @media (max-width: 992px) {
             .hero-title {
@@ -795,16 +799,13 @@
                 padding: 12px 20px;
                 font-size: 15px;
             }
+            
+            .nav-item {
+                margin-left: 20px;
+            }
         }
         
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 15x;
-            }
-            
             .mobile-menu-toggle {
                 display: flex;
             }
@@ -845,6 +846,7 @@
             
             .nav-btn {
                 margin-top: 20px;
+                margin-left: 0;
             }
             
             .nav-btn .btn {
@@ -880,7 +882,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: transparent;
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 998;
             }
             
@@ -893,24 +895,26 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-container">
-            <div class="logo" style="padding-left: 15px;">
-                RLC <span>Agency</span>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo">
+                    RLC <span>Agency</span>
+                </div>
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                        <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
+                        <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                        <li class="nav-item nav-btn"><a href="tel:6159623999" class="btn">Call Now: (615) 962-3999</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="mobile-menu-toggle" id="mobile-menu-toggle" style="padding-right: 15px;">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <nav id="main-nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#how-it-works" class="nav-link">How It Works</a></li>
-                    <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
-                    <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item nav-btn"><a href="tel:6159623999" class="btn">Call Now: (615) 962-3999</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
@@ -1727,7 +1731,8 @@
         }
         
         .roi-chart-title {
-            font-size: 1.8rem;
+            font-size:
+1.8rem;
             color: #0f2b5b;
             margin-bottom: 10px;
         }
@@ -1810,6 +1815,10 @@
             transition: height 1s ease-out;
             box-shadow: 0 3px 10px rgba(0, 87, 179, 0.2);
             align-self: flex-end;
+        }
+        
+        .roi-bar:hover {
+            background: linear-gradient(to top, #e65c00, #ff8124);
         }
         
         .roi-bar-value {
@@ -2428,4 +2437,3 @@
 </script>
 </body>
 </html>
-
