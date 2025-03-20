@@ -2262,40 +2262,21 @@ document.addEventListener('DOMContentLoaded', function() {
         body.classList.toggle('menu-open');
     }
     
-    // Event listeners
+    // Event listeners for menu toggle
     if(menuToggle) {
         menuToggle.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
     }
     
-    // Close menu when clicking on a nav link
+    // Simplified approach for nav links - just close the mobile menu when clicked
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Get the href attribute
-            const href = this.getAttribute('href');
-            
-            // Only handle internal links (those starting with #)
-            if (href && href.startsWith('#')) {
-                // Get the target element
-                const targetElement = document.querySelector(href);
-                
-                if (targetElement) {
-                    // Close the mobile menu if it's open
-                    if (mainNav && mainNav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                    
-                    // Small delay to allow menu to close before scrolling
-                    setTimeout(() => {
-                        // Scroll to the element
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }, 300);
-                }
+        link.addEventListener('click', function() {
+            // Close the mobile menu if it's open
+            if (mainNav && mainNav.classList.contains('active')) {
+                toggleMenu();
             }
+            // Let the browser handle the hash navigation naturally
         });
     });
     
